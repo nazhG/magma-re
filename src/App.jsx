@@ -1,5 +1,13 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import SAND from "./abis/SAND";
+import months from "./abis/months";
+import { Chart } from "react-google-charts";
+
+const options = {
+  title: "Company Performance",
+  curveType: "function",
+  legend: { position: "bottom" },
+};
 
 const web3 = new Web3(
   "https://mainnet.infura.io/v3/076ccce983354a8cb12a6e50ef3e42aa"
@@ -14,6 +22,7 @@ function App() {
   const [liquityBalance, setLiquityBalance] = useState(0);
   const [currentBlockNumber, setcurrentBlockNumber] = useState(0);
   const [currentTime, setcurrentTime] = useState(0);
+  const [data, setData] = useState([["Month", "Liquid Supply"]]);
 
   // https://mainnet.infura.io/v3/076ccce983354a8cb12a6e50ef3e42aa
 
@@ -25,42 +34,37 @@ function App() {
   const BN = web3.utils.BN;
 
   const format = (amount) => {
-    return amount
-      .toString()
-      .substring(0, amount.toString().length - 18)
-      .replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+    return amount.toString().substring(0, amount.toString().length - 18);
+    // .replace(/\B(?=(\d{3})+(?!\d))/g, ",");
   };
 
   const formatTime = (time) => {
-    console.log(time);
-    
     const date = new Date(time * 1000);
     return date.toLocaleString();
   };
 
-  const getSandBalance = async () => {
-    const blockNumber = await web3.eth.getBlockNumber()
-    setcurrentBlockNumber(blockNumber)
+  let totalSupply = 0;
 
-    const time = await web3.eth.getBlock(blockNumber)
-    setcurrentTime(formatTime(time.timestamp))
+  const getSandBalance = async (month) => {
+    const blockNumber = await web3.eth.getBlockNumber();
+    setcurrentBlockNumber(blockNumber);
 
-    const totalSupply = new BN(await Sand.methods.totalSupply().call());
+    const time = await web3.eth.getBlock(blockNumber);
+    setcurrentTime(formatTime(time.timestamp));
 
+    let blockNumberTarget = month.blocknumber || blockNumber;
     const AdvisorsBalance = new BN(
-      await Sand.methods.balanceOf(Advisors).call()
+      await Sand.methods.balanceOf(Advisors).call({}, blockNumberTarget)
     );
-    const CompanyBalance = new BN(await Sand.methods.balanceOf(Company).call());
-    const TeamBalance = new BN(await Sand.methods.balanceOf(Team).call());
+    const CompanyBalance = new BN(
+      await Sand.methods.balanceOf(Company).call({}, blockNumberTarget)
+    );
+    const TeamBalance = new BN(
+      await Sand.methods.balanceOf(Team).call({}, blockNumberTarget)
+    );
     const FoundationBalance = new BN(
-      await Sand.methods.balanceOf(Foundation).call()
+      await Sand.methods.balanceOf(Foundation).call({}, blockNumberTarget)
     );
-
-    console.log("totalSupply", format(totalSupply));
-    console.log("AdvisorsBalance", format(AdvisorsBalance));
-    console.log("CompanyBalance", format(CompanyBalance));
-    console.log("TeamBalance", format(TeamBalance));
-    console.log("FoundationBalance", format(FoundationBalance));
 
     const liquidSupply = totalSupply
       .sub(AdvisorsBalance)
@@ -68,16 +72,64 @@ function App() {
       .sub(TeamBalance)
       .sub(FoundationBalance);
 
-    console.log("liquidSupply", format(liquidSupply));
+    console.table({
+      month: month.month,
+      blockNumberTarget,
+      totalSupply: format(totalSupply),
+      AdvisorsBalance: format(AdvisorsBalance),
+      CompanyBalance: format(CompanyBalance),
+      TeamBalance: format(TeamBalance),
+      FoundationBalance: format(FoundationBalance),
+      liquidSupply: format(liquidSupply),
+    });
 
-    setLiquityBalance(format(liquidSupply));
+
+    return liquidSupply;
   };
+
+  const getSupply = async () => {
+    totalSupply = new BN(await Sand.methods.totalSupply().call());
+  };
+
+  useEffect(() => {
+    getSupply();
+    const getData = async (blockNumber) => {
+      let monthsData = [];
+      for (const month of months) {
+        monthsData = [
+          ...monthsData,
+          [
+            month.month,
+            Number(format(await getSandBalance(month))),
+          ],
+        ];
+      }
+
+      setData([...data, ...monthsData]);
+    };
+
+    getData();
+  }, []);
 
   return (
     <>
-      <h1>Magma-Re / current block num: {currentBlockNumber} - time: {currentTime} </h1>
+      <h1>
+        Magma-Re / current block num: {currentBlockNumber} - time: {currentTime}{" "}
+      </h1>
 
-      <button onClick={getSandBalance}>Get Sand Liquity Balance: {liquityBalance}</button>
+      <button onClick={getSandBalance}>
+        Get Sand Liquity Balance: {liquityBalance}
+      </button>
+      <hr />
+
+      <Chart
+        chartType="LineChart"
+        data={data}
+        options={options}
+        width="80%"
+        height="400px"
+        legendToggle
+      />
     </>
   );
 }
