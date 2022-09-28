@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import SAND from "./abis/SAND";
+import CHAINLINK_ORACLE from "./abis/CHAINLINK.js";
 import months from "./abis/months";
 import { Chart } from "react-google-charts";
 
@@ -7,6 +8,9 @@ const options = {
   title: "Company Performance",
   curveType: "function",
   legend: { position: "bottom" },
+  hAxis: {
+    ticks: ["$8.00", "$6.00", "$4.00", "$2.00", "$0.00"],
+  },
 };
 
 const web3 = new Web3(
@@ -31,6 +35,11 @@ function App() {
     "0x3845badAde8e6dFF049820680d1F14bD3903a5d0"
   );
 
+  const priceFeed = new web3.eth.Contract(
+    CHAINLINK_ORACLE,
+    "0x35E3f7E558C04cE7eEE1629258EcbbA03B36Ec56"
+  );
+
   const BN = web3.utils.BN;
 
   const format = (amount) => {
@@ -53,6 +62,11 @@ function App() {
     setcurrentTime(formatTime(time.timestamp));
 
     let blockNumberTarget = month.blocknumber || blockNumber;
+
+    const { answer: price } = await priceFeed.methods
+      .latestRoundData()
+      .call({}, blockNumberTarget);
+    console.log(price / 1e8);
     const AdvisorsBalance = new BN(
       await Sand.methods.balanceOf(Advisors).call({}, blockNumberTarget)
     );
@@ -70,19 +84,19 @@ function App() {
       .sub(AdvisorsBalance)
       .sub(CompanyBalance)
       .sub(TeamBalance)
-      .sub(FoundationBalance);
+      .sub(FoundationBalance)
+      .mul(new BN(price));
 
-    console.table({
-      month: month.month,
-      blockNumberTarget,
-      totalSupply: format(totalSupply),
-      AdvisorsBalance: format(AdvisorsBalance),
-      CompanyBalance: format(CompanyBalance),
-      TeamBalance: format(TeamBalance),
-      FoundationBalance: format(FoundationBalance),
-      liquidSupply: format(liquidSupply),
-    });
-
+    // console.table({
+    //   month: month.month,
+    //   blockNumberTarget,
+    //   totalSupply: format(totalSupply),
+    //   AdvisorsBalance: format(AdvisorsBalance),
+    //   CompanyBalance: format(CompanyBalance),
+    //   TeamBalance: format(TeamBalance),
+    //   FoundationBalance: format(FoundationBalance),
+    //   liquidSupply: format(liquidSupply),
+    // });
 
     return liquidSupply;
   };
@@ -98,10 +112,7 @@ function App() {
       for (const month of months) {
         monthsData = [
           ...monthsData,
-          [
-            month.month,
-            Number(format(await getSandBalance(month))),
-          ],
+          [month.month, Number(format(await getSandBalance(month)))],
         ];
       }
 
@@ -110,7 +121,6 @@ function App() {
 
     getData();
   }, []);
-
   return (
     <>
       <h1>
