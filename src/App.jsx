@@ -3,6 +3,7 @@ import SAND from "./abis/SAND";
 import CHAINLINK_ORACLE from "./abis/CHAINLINK.js";
 import months from "./abis/months";
 import { Chart } from "react-google-charts";
+import SAND_DATA from "../sand_data_09_29.js";
 
 const options = {
   title: "Company Performance",
@@ -28,98 +29,8 @@ function App() {
   const [currentTime, setcurrentTime] = useState(0);
   const [data, setData] = useState([["Month", "Liquid Supply"]]);
 
-  // https://mainnet.infura.io/v3/076ccce983354a8cb12a6e50ef3e42aa
-
-  const Sand = new web3.eth.Contract(
-    SAND,
-    "0x3845badAde8e6dFF049820680d1F14bD3903a5d0"
-  );
-
-  const priceFeed = new web3.eth.Contract(
-    CHAINLINK_ORACLE,
-    "0x35E3f7E558C04cE7eEE1629258EcbbA03B36Ec56"
-  );
-
-  const BN = web3.utils.BN;
-
-  const format = (amount) => {
-    return amount.toString().substring(0, amount.toString().length - 18);
-    // .replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-  };
-
-  const formatTime = (time) => {
-    const date = new Date(time * 1000);
-    return date.toLocaleString();
-  };
-
-  let totalSupply = 0;
-
-  const getSandBalance = async (month) => {
-    const blockNumber = await web3.eth.getBlockNumber();
-    setcurrentBlockNumber(blockNumber);
-
-    const time = await web3.eth.getBlock(blockNumber);
-    setcurrentTime(formatTime(time.timestamp));
-
-    let blockNumberTarget = month.blocknumber || blockNumber;
-
-    const { answer: price } = await priceFeed.methods
-      .latestRoundData()
-      .call({}, blockNumberTarget);
-    console.log(price / 1e8);
-    const AdvisorsBalance = new BN(
-      await Sand.methods.balanceOf(Advisors).call({}, blockNumberTarget)
-    );
-    const CompanyBalance = new BN(
-      await Sand.methods.balanceOf(Company).call({}, blockNumberTarget)
-    );
-    const TeamBalance = new BN(
-      await Sand.methods.balanceOf(Team).call({}, blockNumberTarget)
-    );
-    const FoundationBalance = new BN(
-      await Sand.methods.balanceOf(Foundation).call({}, blockNumberTarget)
-    );
-
-    const liquidSupply = totalSupply
-      .sub(AdvisorsBalance)
-      .sub(CompanyBalance)
-      .sub(TeamBalance)
-      .sub(FoundationBalance)
-      .mul(new BN(price));
-
-    // console.table({
-    //   month: month.month,
-    //   blockNumberTarget,
-    //   totalSupply: format(totalSupply),
-    //   AdvisorsBalance: format(AdvisorsBalance),
-    //   CompanyBalance: format(CompanyBalance),
-    //   TeamBalance: format(TeamBalance),
-    //   FoundationBalance: format(FoundationBalance),
-    //   liquidSupply: format(liquidSupply),
-    // });
-
-    return liquidSupply;
-  };
-
-  const getSupply = async () => {
-    totalSupply = new BN(await Sand.methods.totalSupply().call());
-  };
-
   useEffect(() => {
-    getSupply();
-    const getData = async (blockNumber) => {
-      let monthsData = [];
-      for (const month of months) {
-        monthsData = [
-          ...monthsData,
-          [month.month, Number(format(await getSandBalance(month)))],
-        ];
-      }
-
-      setData([...data, ...monthsData]);
-    };
-
-    getData();
+    setData([...data, ...SAND_DATA]);
   }, []);
   return (
     <>
@@ -127,9 +38,9 @@ function App() {
         Magma-Re / current block num: {currentBlockNumber} - time: {currentTime}{" "}
       </h1>
 
-      <button onClick={getSandBalance}>
+      {/* <button onClick={getSandBalance}>
         Get Sand Liquity Balance: {liquityBalance}
-      </button>
+      </button> */}
       <hr />
 
       <Chart
