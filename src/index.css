@@ -1,0 +1,126 @@
+.logo-verse {
+    width: 100%;
+    height: 100%;
+    padding: 1rem;
+    border-radius: 50% !important;
+}
+
+.logo-verse-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.logo-verse-container img {
+    max-width: 160px;
+}
+
+body {
+    background-color: #111;
+    font-family: "Roboto";
+    font-size: 1rem;
+    color: #fff;
+}
+
+.marco {
+    background-color: #333;
+    border: #555 solid 1px;
+    border-radius: 5px;
+}
+
+hr {
+    margin-top: 0px;
+}
+
+.dato {
+    background-color: #444;
+    padding: 3px;
+    border-radius: 5px;
+}
+
+h3 {
+    word-break: overflow-wrap;
+}
+
+th {
+    font-weight: normal !important;
+}
+
+.table>:not(caption)>*>* {
+    background-color: transparent !important;
+}
+
+/** colores botones paginas **/
+
+.discord {
+    background-color: #7289da;
+    color: #fff;
+}
+
+.discord:hover {
+    background-color: #5f73b9;
+}
+
+.twitter {
+    background-color: #1da1f2;
+    color: #fff;
+}
+
+.twitter:hover {
+    background-color: #0f8bd5;
+}
+
+.instagram {
+    background-color: #e1306c;
+    color: #fff;
+}
+
+.instagram:hover {
+    background-color: #c11e55;
+}
+
+.youtube {
+    background-color: #ff0000;
+    color: #fff;
+}
+
+.youtube:hover {
+    background-color: #d40000;
+}
+
+.twitch {
+    background-color: #6441a5;
+    color: #fff;
+}
+
+.twitch:hover {
+    background-color: #4e328a;
+}
+
+.facebook {
+    background-color: #3b5998;
+    color: #fff;
+}
+
+.facebook:hover {
+    background-color: #2f477b;
+}
+
+.reddit {
+    background-color: #ff4500;
+    color: #fff;
+}
+
+.reddit:hover {
+    background-color: #d43c00;
+}
+
+.telegram {
+    background-color: #0088cc;
+    color: #fff;
+}
+
+.telegram:hover {
+    background-color: #0077b3;
+}
+
