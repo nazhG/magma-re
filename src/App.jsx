@@ -1,11 +1,12 @@
 import { useState, useEffect } from "react";
 import SAND from "./abis/SAND";
 import CHAINLINK_ORACLE from "./abis/CHAINLINK.js";
+import OPEN_SEA_RESPONSE from "./abis/open_sea_response.js";
 import months from "./abis/months";
 import { Chart } from "react-google-charts";
 import SAND_DATA from "../sand_data_09_29.js";
 import SAND_PRICE from "../sand_price_09_29.js";
-import { FaTwitter, FaDiscord, FaEllipsisV } from "react-icons/fa";
+import { FaTwitter, FaDiscord, FaEllipsisV, FaEthereum } from "react-icons/fa";
 
 const options = {
   title: "Price (USD)",
@@ -78,6 +79,11 @@ function App() {
   const numberWithCommas = (x) => {
     return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
   };
+
+  const {
+    collection: { stats },
+  } = OPEN_SEA_RESPONSE;
+  console.log(stats);
 
   useEffect(() => {
     setData([...data, ...SAND_DATA]);
@@ -156,7 +162,7 @@ function App() {
         </div>
         <hr className="row" />
         <div className="row">
-          <div className="col-6">
+          <div className="col-12 col-md-6">
             <h3 className="bg-dark rounded p-2">Native Coin</h3>
             <table className="table table-dark">
               <tbody>
@@ -165,17 +171,17 @@ function App() {
                   <td className="dato">SAND</td>
                 </tr>
                 <tr>
-                  <th scope="row">Coin Value</th>
-                  <td className="dato">
-                    {dollarUS.format(SAND_PRICE[SAND_PRICE.length - 1][1])}
-                  </td>
-                </tr>
-                <tr>
                   <th scope="row">Market Cap</th>
                   <td className="dato">
                     {dollarUS.format(
                       Number(SAND_DATA[SAND_DATA.length - 1][1])
                     )}
+                  </td>
+                </tr>
+                <tr>
+                  <th scope="row">Coin Value</th>
+                  <td className="dato">
+                    {dollarUS.format(SAND_PRICE[SAND_PRICE.length - 1][1])}
                   </td>
                 </tr>
                 <tr>
@@ -200,31 +206,42 @@ function App() {
               </tbody>
             </table>
           </div>
-          <div className="col-6">
+          <div className="col-12 col-md-6">
             <h3 className="bg-dark rounded p-2">LAND NFTs</h3>
-            <p>
-              Token Name: <span className="dato">$Sand</span>
-            </p>
-            <p>
-              Floor Price: <span className="dato">$0.93</span>
-            </p>
-            <p>
-              Market Cap: <span className="dato">$0.93</span>
-            </p>
-            <p>
-              Daily Volume: <span className="dato">$0.93</span>
-            </p>
-            <p>
-              Holdes: <span className="dato">$0.93</span>
-            </p>
-            <p>
-              Circulating: <span className="dato">$0.93</span>
-            </p>
-            <p>
-              Max Supply: <span className="dato">$0.93</span>
-            </p>
+            <table className="table table-dark">
+              <tbody>
+                <tr>
+                  <th scope="row">Name</th>
+                  <td className="dato">LAND</td>
+                </tr>
+                <tr>
+                  <th scope="row">Market Cap</th>
+                  <td className="dato">{dollarUS.format(stats.market_cap)}</td>
+                </tr>
+                <tr>
+                  <th scope="row">Asset</th>
+                  <td className="dato">{numberWithCommas(stats.total_supply)}</td>
+                </tr>
+                <tr>
+                  <th scope="row">Owners</th>
+                  <td className="dato">{numberWithCommas(stats.num_owners)}</td>
+                </tr>
+                <tr>
+                  <th scope="row">Floor Price</th>
+                  <td className="dato"><FaEthereum />{stats.floor_price.toFixed(3)}</td>
+                </tr>
+                <tr>
+                  <th scope="row">Average Price</th>
+                  <td className="dato"><FaEthereum />{stats.average_price.toFixed(3)}</td>
+                </tr>
+                <tr>
+                  <th scope="row">Volumen (24h)**</th>
+                  <td className="dato"><FaEthereum />{stats.one_day_volume.toFixed(3)}</td>
+                </tr>
+              </tbody>
+            </table>
           </div>
-          <div className="col-6">
+          {/* <div className="col-6">
             <h3 className="bg-dark rounded p-2">ASSETS / WEARABLES NFTs</h3>
             <p>
               Token Name: <span className="dato">$Sand</span>
@@ -271,11 +288,11 @@ function App() {
             <p>
               Max Supply: <span className="dato">$0.93</span>
             </p>
-          </div>
+          </div> */}
           <div className="col-12">
             <h3 className="bg-dark rounded p-2">Community Network</h3>
-            <div className="d-flex justify-content-between">
-              <span>
+            <div className="d-flex d-flex flex-wrap justify-content-between">
+              <span className="mt-1">
                 <a
                   className="btn btn-secondary discord"
                   href="https://discord.com/invite/thesandboxgame"
@@ -285,7 +302,7 @@ function App() {
                   Discord
                 </a>
               </span>
-              <span>
+              <span className="mt-1">
                 <a
                   className="btn btn-secondary twitter"
                   href="https://twitter.com/thesandboxgame"
@@ -295,7 +312,7 @@ function App() {
                   Twitter
                 </a>
               </span>
-              <span>
+              <span className="mt-1">
                 <a
                   className="btn btn-secondary twitch"
                   href="https://www.twitch.tv/thesandboxgame"
@@ -305,27 +322,7 @@ function App() {
                   Twitch
                 </a>
               </span>
-              {/* <span>
-                <a
-                  className="btn btn-secondary telegram"
-                  href="https://t.me/sandboxgame"
-                  target="_blank"
-                  rel="noreferrer"
-                >
-                  Telegram
-                </a>
-              </span>
-              <span>
-                <a
-                  className="btn btn-secondary reddit"
-                  href="https://www.reddit.com/r/TheSandboxGaming/"
-                  target="_blank"
-                  rel="noreferrer"
-                >
-                  Reddit
-                </a>
-              </span> */}
-              <span>
+              <span className="mt-1">
                 <a
                   className="btn btn-secondary instagram"
                   href="https://www.instagram.com/thesandboxgame"
@@ -335,7 +332,7 @@ function App() {
                   Instagram
                 </a>
               </span>
-              <span>
+              <span className="mt-1">
                 <a
                   className="btn btn-secondary facebook"
                   href="https://www.facebook.com/TheSandboxGame/"
@@ -345,7 +342,7 @@ function App() {
                   Facebook
                 </a>
               </span>
-              <span>
+              <span className="mt-1">
                 <a
                   className="btn btn-secondary youtube"
                   href="https://www.youtube.com/channel/UCzv1t7voB-bxMmXLysT4h0w"
@@ -357,9 +354,9 @@ function App() {
           </div>
         </div>
         <div className="row mt-3">
-          <h3 className="bg-dark rounded p-2 mx-2">Metaverse Performance</h3>
-          <div className="col-10 offset-1">
-            <div className="container marco bg-secondary p-3 display m-4">
+          <h3 className="bg-dark rounded p-2">Metaverse Performance</h3>
+          <div className="col-12 col-md-10 offset-md-1">
+            <div className="container marco bg-secondary p-3 display mt-4">
               <Chart
                 className="m-0"
                 chartType="LineChart"
@@ -371,8 +368,8 @@ function App() {
               />
             </div>
           </div>
-          <div className="col-10 offset-1">
-            <div className="container marco bg-secondary p-3 display m-4">
+          <div className="col-12 col-md-10 offset-md-1">
+            <div className="container marco bg-secondary p-3 display mt-4">
               <Chart
                 className="m-0"
                 chartType="LineChart"

@@ -1,4 +1,4 @@
-{
+export default {
     "collection": {
         "editors": [
             "0x7a9fe22691c811ea339d9b73150e6911a5343dca"
@@ -54,7 +54,7 @@
                 "eth_price": 0.0007555,
                 "usd_price": 1.0
             }
-        ],
+        ],  
         "primary_asset_contracts": [
             {
                 "address": "0x067a1eb5e383ed24b66d72aaf80d8d7db3d299a8",
@@ -276,4 +276,4 @@
         },
         "is_rarity_enabled": false
     }
-}
+};
