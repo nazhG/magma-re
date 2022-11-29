@@ -4,6 +4,7 @@ export const metaverses = [
   {
     name: "Sandbox",
     token: "SAND",
+    chainID: 1,
     address: "0x3845badAde8e6dFF049820680d1F14bD3903a5d0",
     image: "https://static.nftgo.io/asset/1624853691744.png",
     link: "https://sandbox.game/",
@@ -44,6 +45,7 @@ export const metaverses = [
   {
     name: "Decentraland",
     token: "MANA",
+    chainID: 1,
     address: "0x0f5d2fb29fb7d3cfee444a200298f468908cc942",
     image: "https://static.nftgo.io/asset/1626416314237.png",
     link: "https://decentraland.org/",
@@ -79,6 +81,7 @@ export const metaverses = [
   {
     name: "Somnium Space",
     token: "CUBE",
+    chainID: 1,
     address: "0xdf801468a808a32656d2ed2d2d80b72a129739f4",
     image:
       "https://lh3.googleusercontent.com/mzUNo5vk95qQfpAbXir0_6oJmZlyqnq_ix3BIjmfeVGrFPoxeAqf-vYHMvh115bSdJGxRtgGTWKldOzdJQGtEqGW=s130",
@@ -110,10 +113,10 @@ export const metaverses = [
       },
     ],
   },
-  // poligon
   {
     name: "Voxels",
     token: "VOXEL",
+    chainID: 137, // poligon
     address: "0xd0258a3fd00f38aa8090dfee343f10a9d4d30d3f",
     image: "https://www.voxels.com/images/Voxels_logo_128.png",
     link: "https://voxies.io/",
@@ -137,6 +140,7 @@ export const metaverses = [
   {
     name: "Otherside",
     token: "$APE",
+    chainID: 1,
     address: "0x4d224452801aced8b2f0aebe155379bb5d594381",
     image:
       "https://lh3.googleusercontent.com/yIm-M5-BpSDdTEIJRt5D6xphizhIdozXjqSITgK4phWq7MmAU3qE7Nw7POGCiPGyhtJ3ZFP8iJ29TFl-RLcGBWX5qI4-ZcnCPcsY4zI=s120",
@@ -159,5 +163,6 @@ export const metaverses = [
       ],
   },
 ];
+
 export const etherScan = "https://etherscan.io/address/";
 export const poligonScan = "https://polygonscan.com/address/";

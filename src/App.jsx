@@ -106,7 +106,7 @@ function App() {
     })
 
 
-    axios.get(`https://seahorse-app-caibw.ondigitalocean.app/price/${ metaverses[metaverseActive].token }/${new Date(startDate).getTime()}/${endDate ? (new Date(endDate).getTime()) : 9999999999999999}`).then(resp => {
+    axios.get(`https://seahorse-app-caibw.ondigitalocean.app/price/${metaverses[metaverseActive].token}/${new Date(startDate).getTime()}/${endDate ? (new Date(endDate).getTime()) : 9999999999999999}`).then(resp => {
       const data0 = resp.data.map(
         (item) => {
           const date = new Date(item.date);
@@ -123,6 +123,7 @@ function App() {
 
   }, [startDate, endDate, metaverseActive]);
 
+  // TODO: btn agregar a meta mask
   const metaverses = [
     {
       name: "Sandbox",
@@ -132,6 +133,12 @@ function App() {
       link: "https://sandbox.game/",
       tittle: "A Decentralized Gaming Ecosystem Made By Players",
       description: "The Sandbox is a community-driven platform where creators can monetize voxel assets and gaming experiences on the blockchain. The Sandbox metaverse comprises a map made up of 166,464 LANDS. LAND owners can host contests and events, stake SAND to earn and customize assets, monetize assets and experiences, vote in the metaverse governance, play games that you or others create, and more! Trade the collection and keep your eyes peeled for future drops",
+      sites: '',
+      // privileged, address of the project participants, which are deducted from the calculations of the available balance.
+      privileged: [{
+        name: "developers",
+        address: "0xb98cdacd006b9d47c37ca63cc86f916ee23fc550"
+      }],
     },
     {
       name: "Decentraland",
@@ -141,6 +148,11 @@ function App() {
       link: "https://decentraland.org/",
       tittle: "Create, explore and trade in the first-ever virtual world owned by its users.",
       description: "No description.",
+      privileged:
+        [{
+          name: "developers",
+          address: "0xb98cdacd006b9d47c37ca63cc86f916ee23fc550"
+        }],
     },
     {
       name: "Somnium Space",
@@ -150,6 +162,12 @@ function App() {
       link: "https://somniumspace.com/",
       tittle: "SOMNIUM SPACE IS A VIRTUAL REALITY WORLD: Open, Social & Persistent.",
       description: "Somnium Space is a virtual world where you can create, play, and monetize your content. It’s a place where you can be anyone you want to be, and do anything you want to do. It’s a place where you can be anyone you want to be, and do anything you want to do.",
+      privileged:
+        [{
+          name: "developers",
+          address: "0xb98cdacd006b9d47c37ca63cc86f916ee23fc550"
+        }],
+
     },
     {
       name: "Voxels",
@@ -159,6 +177,11 @@ function App() {
       link: "https://www.voxels.com/",
       tittle: "A USER-OWNED VIRTUAL WORLD: Players can buy land, build on it, customize their avatar with wearable NFTs and more!",
       description: "No description.",
+      privileged:
+        [{
+          name: "developers",
+          address: "0xb98cdacd006b9d47c37ca63cc86f916ee23fc550"
+        }],
     },
     {
       name: "Otherside",
@@ -168,6 +191,11 @@ function App() {
       link: "https://otherside.xyz/",
       tittle: "ENTER the OTHERSIDE",
       description: "Otherside is a gamified, interoperable metaverse currently under development. The game blends mechanics from massively multiplayer online role playing games (MMORPGs) and web3-enabled virtual worlds. Think of it as a metaRPG where the players own the world, your NFTs can become playable characters, and thousands can play together in real time.",
+      privileged:
+        [{
+          name: "developers",
+          address: "0xb98cdacd006b9d47c37ca63cc86f916ee23fc550"
+        }],
     },
 
   ];
@@ -176,7 +204,7 @@ function App() {
       <header className="container-fuild">
         <div className="col-12 row p-3">
           <span className="col-9">
-            <img src="./logo.png" alt="logo" />
+            <img class="logoHeader" src="./LogoMagmaverse.jpg" alt="logo" />
           </span>
           <span className="col-3 d-flex justify-content-between">
             <a
@@ -465,6 +493,9 @@ function App() {
             />
           </div>
 
+
+          <div className="col-12 col-md-10 offset-md-1">
+          </div>
           <div className="col-12 col-md-10 offset-md-1">
             <div className="container marco bg-secondary p-3 display mt-4">
               <Chart

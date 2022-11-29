@@ -1,126 +1,452 @@
 .logo-verse {
-    width: 100%;
-    padding: 1rem;
-    border-radius: 50% !important;
+  width: 100%;
+  padding: 1rem;
+  border-radius: 50% !important;
 }
 
 .logo-verse-container {
-    display: flex;
-    justify-content: center;
-    align-items: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .logo-verse-container img {
-    max-width: 160px;
+  max-width: 160px;
 }
 
 body {
-    min-width: 320px;
-    background-color: #111;
-    font-family: "Roboto";
-    font-size: 1rem;
-    color: #fff;
+  min-width: 320px;
+  background-color: #111;
+  font-family: "Roboto";
+  font-size: 1rem;
+  color: #fff;
 }
 
 .marco {
-    background-color: #333;
-    border: #555 solid 1px;
-    border-radius: 5px;
+  background-color: #333;
+  border: #555 solid 1px;
+  border-radius: 5px;
 }
 
 hr {
-    margin-top: 0px;
+  margin-top: 0px;
 }
 
 .dato {
-    background-color: #444;
-    padding: 3px;
-    border-radius: 5px;
+  background-color: #444;
+  padding: 3px;
+  border-radius: 5px;
 }
 
 h3 {
-    word-break: overflow-wrap;
+  word-break: overflow-wrap;
 }
 
 th {
-    font-weight: normal !important;
+  font-weight: normal !important;
 }
 
-.table>:not(caption)>*>* {
-    background-color: transparent !important;
+.table > :not(caption) > * > * {
+  background-color: transparent !important;
 }
 
 /** colores botones paginas **/
 
 .discord {
-    background-color: #7289da;
-    color: #fff;
+  background-color: #7289da;
+  color: #fff;
 }
 
 .discord:hover {
-    background-color: #5f73b9;
+  background-color: #5f73b9;
 }
 
 .twitter {
-    background-color: #1da1f2;
-    color: #fff;
+  background-color: #1da1f2;
+  color: #fff;
 }
 
 .twitter:hover {
-    background-color: #0f8bd5;
+  background-color: #0f8bd5;
 }
 
 .instagram {
-    background-color: #e1306c;
-    color: #fff;
+  background-color: #e1306c;
+  color: #fff;
 }
 
 .instagram:hover {
-    background-color: #c11e55;
+  background-color: #c11e55;
 }
 
 .youtube {
-    background-color: #ff0000;
-    color: #fff;
+  background-color: #ff0000;
+  color: #fff;
 }
 
 .youtube:hover {
-    background-color: #d40000;
+  background-color: #d40000;
 }
 
 .twitch {
-    background-color: #6441a5;
-    color: #fff;
+  background-color: #6441a5;
+  color: #fff;
 }
 
 .twitch:hover {
-    background-color: #4e328a;
+  background-color: #4e328a;
 }
 
 .facebook {
-    background-color: #3b5998;
-    color: #fff;
+  background-color: #3b5998;
+  color: #fff;
 }
 
 .facebook:hover {
-    background-color: #2f477b;
+  background-color: #2f477b;
 }
 
 .reddit {
-    background-color: #ff4500;
-    color: #fff;
+  background-color: #ff4500;
+  color: #fff;
 }
 
 .reddit:hover {
-    background-color: #d43c00;
+  background-color: #d43c00;
 }
 
 .telegram {
-    background-color: #0088cc;
-    color: #fff;
+  background-color: #0088cc;
+  color: #fff;
 }
 
 .telegram:hover {
-    background-color: #0077b3;
+  background-color: #0077b3;
 }
 
+/** NEW Styles */
+
+body {
+  background: linear-gradient(
+    -25deg,
+    #170a74,
+    #170a74,
+    #cc20aa,
+    #170a74,
+    #170a74,
+    #cc20aa,
+    #170a74,
+    #170a74
+  );
+  background-size: 100%;
+  background-repeat: no-repeat;
+  margin: 0;
+  text-align: center;
+  font-family: "Open Sans", sans-serif;
+}
+
+h1,
+p {
+  color: white;
+}
+
+.logoHeader {
+  width: 10%;
+  border-radius: 100%;
+  margin-right: 3%;
+}
+
+.round-logo {
+  border-radius: 100%;
+}
+
+.nav-link2 {
+  display: block;
+  padding: var(--bs-nav-link-padding-y) var(--bs-nav-link-padding-x);
+  font-size: var(--bs-nav-link-font-size);
+  font-weight: var(--bs-nav-link-font-weight);
+  color: white;
+  text-decoration: none;
+  transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out,
+    border-color 0.15s ease-in-out;
+}
+
+.nav-item {
+  --bs-nav-pills-link-active-bg: #cc20aa;
+}
+
+.pb-2 {
+  color: white;
+}
+
+.bold {
+  font-weight: bold;
+}
+
+.col-10 {
+  margin-top: 0;
+}
+
+.btn-report {
+  padding: 0 0 10%;
+}
+
+/* CUSTOMIZE THE CAROUSEL
+  -------------------------------------------------- */
+
+/* Carousel base class */
+.carousel {
+  margin-bottom: 4rem;
+}
+/* Since positioning the image, we need to help out the caption */
+.carousel-caption {
+  bottom: 3rem;
+  z-index: 10;
+}
+
+/* Declare heights because of positioning of img element */
+.carousel-item {
+  height: 32rem;
+}
+
+.hr {
+  border-style: none;
+  border-top-style: dotted;
+  border-width: 10px;
+  color: white;
+  width: 7%;
+  margin: 0 auto 0;
+}
+
+/* Pricing */
+
+.card-title {
+  color: white;
+}
+
+.card-header2 {
+  background: linear-gradient(0deg, #6e34d9, #b82bb3);
+  border-radius: 4px 4px 0 0;
+}
+
+.card-body {
+  background-color: #000000;
+}
+
+/* Card Efects */
+
+.images-overlay2 {
+  position: relative;
+  margin-top: -112%;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.8);
+  color: white;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  transition: opacity 0.3s;
+}
+
+.images-overlay2 > * {
+  transform: translateY(20px);
+  transition: transform 0.3s;
+}
+
+.images-overlay2:hover {
+  opacity: 1;
+}
+
+.images-overlay2:hover > * {
+  transform: translateY(0px);
+}
+
+.images-overlay {
+  position: relative;
+  margin-top: -100%;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.8);
+  color: white;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  transition: opacity 0.3s;
+}
+
+.images-overlay-blur {
+  backdrop-filter: blur(10px);
+}
+
+.images-overlay > * {
+  transform: translateY(20px);
+  transition: transform 0.3s;
+}
+
+.images-overlay:hover {
+  opacity: 1;
+}
+
+.images-overlay:hover > * {
+  transform: translateY(0px);
+}
+
+.image-title-1 {
+  font-size: 1.3em;
+  text-align: center;
+}
+
+.images-description {
+  font-size: 1.2em;
+  color: white;
+  padding: 2.5% 0 0;
+  text-align: center;
+}
+
+/* Buttons */
+
+.btn1 {
+  -webkit-border-radius: 10;
+  -moz-border-radius: 10;
+  border-radius: 10px;
+  font-family: "Open Sans", sans-serif;
+  color: #fff;
+  font-size: 20px;
+  padding: 10px 20px 10px 20px;
+  border: solid #ffffff 2px;
+  text-decoration: none;
+}
+
+.btn1:hover {
+  background: #b82bb3;
+  background-image: -webkit-linear-gradient(top, #b82bb3, #6e34d9);
+  background-image: -moz-linear-gradient(top, #b82bb3, #6e34d9);
+  background-image: -ms-linear-gradient(top, #b82bb3, #6e34d9);
+  background-image: -o-linear-gradient(top, #b82bb3, #6e34d9);
+  background-image: linear-gradient(to bottom, #b82bb3, #6e34d9);
+  color: #ffffff;
+  text-decoration: none;
+}
+
+.btn2 {
+  background: #6e34d9;
+  background-image: -webkit-linear-gradient(top, #6e34d9, #b82bb3);
+  background-image: -moz-linear-gradient(top, #6e34d9, #b82bb3);
+  background-image: -ms-linear-gradient(top, #6e34d9, #b82bb3);
+  background-image: -o-linear-gradient(top, #6e34d9, #b82bb3);
+  background-image: linear-gradient(to bottom, #6e34d9, #b82bb3);
+  -webkit-border-radius: 12;
+  -moz-border-radius: 12;
+  border-radius: 12px;
+  font-family: "Open Sans", sans-serif;
+  font-weight: bold;
+  color: #ffffff;
+  font-size: 20px;
+  padding: 10px 20px 10px 20px;
+  text-decoration: none;
+  text-align: center;
+}
+
+.btn2:hover {
+  background: #b82bb3;
+  background-image: -webkit-linear-gradient(top, #b82bb3, #6e34d9);
+  background-image: -moz-linear-gradient(top, #b82bb3, #6e34d9);
+  background-image: -ms-linear-gradient(top, #b82bb3, #6e34d9);
+  background-image: -o-linear-gradient(top, #b82bb3, #6e34d9);
+  background-image: linear-gradient(to bottom, #b82bb3, #6e34d9);
+  color: #ffffff;
+  text-decoration: none;
+}
+
+.btn3 {
+  -webkit-border-radius: 12;
+  -moz-border-radius: 12;
+  border-radius: 12px;
+  font-family: Arial;
+  color: #ffffff;
+  font-size: 20px;
+  background: #000000;
+  padding: 10px 20px 10px 20px;
+  border: solid #ffffff 2px;
+  font-family: "Open Sans", sans-serif;
+  font-weight: bold;
+  text-decoration: none;
+}
+
+.btn3:hover {
+  background: #6e34d9;
+  background-image: -webkit-linear-gradient(top, #6e34d9, #b82bb3);
+  background-image: -moz-linear-gradient(top, #6e34d9, #b82bb3);
+  background-image: -ms-linear-gradient(top, #6e34d9, #b82bb3);
+  background-image: -o-linear-gradient(top, #6e34d9, #b82bb3);
+  background-image: linear-gradient(to bottom, #6e34d9, #b82bb3);
+  border: solid #14110f 2px;
+  color: #ffffff;
+  text-decoration: none;
+}
+
+.btn4 {
+  background: #6e34d9;
+  background-image: -webkit-linear-gradient(top, #6e34d9, #b82bb3);
+  background-image: -moz-linear-gradient(top, #6e34d9, #b82bb3);
+  background-image: -ms-linear-gradient(top, #6e34d9, #b82bb3);
+  background-image: -o-linear-gradient(top, #6e34d9, #b82bb3);
+  background-image: linear-gradient(to bottom, #6e34d9, #b82bb3);
+  -webkit-border-radius: 12;
+  -moz-border-radius: 12;
+  border-radius: 12px;
+  font-family: "Open Sans", sans-serif;
+  font-weight: bold;
+  color: #ffffff;
+  font-size: 20px;
+  padding: 10px 20px 10px 20px;
+  border: solid #14110f 2px;
+  text-decoration: none;
+  text-align: center;
+}
+
+.btn4:hover {
+  background: #b82bb3;
+  background-image: -webkit-linear-gradient(top, #b82bb3, #6e34d9);
+  background-image: -moz-linear-gradient(top, #b82bb3, #6e34d9);
+  background-image: -ms-linear-gradient(top, #b82bb3, #6e34d9);
+  background-image: -o-linear-gradient(top, #b82bb3, #6e34d9);
+  background-image: linear-gradient(to bottom, #b82bb3, #6e34d9);
+  color: #ffffff;
+  text-decoration: none;
+}
+
+/* Footer */
+
+.rights-reserved {
+  text-align: center;
+  padding: 0 0 3%;
+  margin: 0;
+  font-size: 75%;
+  font-weight: bold;
+  color: #978fc0;
+}
+
+@media (max-width: 1028px) {
+  .images-overlay2 {
+    width: 0;
+    height: 0;
+    display: none;
+  }
+  .images-overlay {
+    width: 0;
+    height: 0;
+    display: none;
+  }
+  .div-report {
+    text-align: center;
+  }
+}
